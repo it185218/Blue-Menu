@@ -1,0 +1,38 @@
+/* Shared switcher between the two design versions (Εκδοχή Α / Εκδοχή Β) */
+
+.version-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  height: 42px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #131E42;
+}
+
+.version-tabs a {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-family: 'Commissioner', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.version-tabs a:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.version-tabs a.active {
+  background: var(--accent, #2FA8BC);
+  border-color: var(--accent, #2FA8BC);
+  color: #FFFFFF;
+}

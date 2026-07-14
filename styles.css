@@ -32,7 +32,7 @@ a:hover {
 
 .topnav {
   position: sticky;
-  top: 0;
+  top: 42px; /* sits below the version-tabs bar */
   z-index: 50;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(12px);
@@ -146,7 +146,7 @@ a:hover {
 }
 
 .section {
-  scroll-margin-top: 72px;
+  scroll-margin-top: 114px;
   margin-top: 36px;
 }
 
