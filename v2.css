@@ -108,59 +108,80 @@ button {
   border-color: var(--accent);
 }
 
-/* Home: category grid */
+/* Home: category list */
 
-.grid {
+.cat-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  padding: 16px;
-}
-
-.tile {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   gap: 10px;
+  padding: 16px 16px 4px;
+}
+
+.cat-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   background: #FFFFFF;
-  border-radius: 18px;
-  padding: 15px 14px;
+  border-radius: 16px;
+  padding: 11px 14px 11px 11px;
   box-shadow: var(--card-shadow);
-  text-align: left;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.tile:hover .tile-name {
-  color: var(--accent);
+.cat-row:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(16, 24, 40, 0.1), 0 1px 3px rgba(16, 24, 40, 0.08);
 }
 
-.tile-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: rgba(47, 168, 188, 0.13);
+.cat-icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: linear-gradient(150deg, #24356E 0%, #1C2957 100%);
+  color: #8FD9E6;
   display: grid;
   place-items: center;
-  font-size: 21px;
 }
 
-.tile-name {
-  font-size: 14px;
+.cat-name {
+  font-size: 14.5px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
-.tile-sub {
+.cat-sub {
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--muted);
   margin-top: 2px;
 }
 
-.tile-count {
-  font-size: 11px;
+.cat-meta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cat-count {
+  min-width: 22px;
+  text-align: center;
+  font-size: 10.5px;
+  font-weight: 700;
   color: var(--muted);
+  background: rgba(28, 41, 87, 0.06);
+  border-radius: 999px;
+  padding: 3px 7px;
+}
+
+.cat-chevron {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(28, 41, 87, 0.35);
+  transform: translateY(-1px);
 }
 
 /* Category screen */

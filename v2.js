@@ -3,10 +3,25 @@
 //   #        → home (hero, search, category grid, legal card)
 //   #c/<id>  → one category's item list with back button and chips
 
+// Monoline SVG icons (24×24, stroke-based) per category id.
+const svg = (inner) =>
+  '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+
 const ICONS = {
-  rofimata: '☕', fresh: '🍊', juices: '🧃', soft: '🥤', food: '🍔',
-  pizza: '🍕', icecream: '🍦', wine: '🍷', cocktails: '🍹', premium: '🍸',
-  spirits: '🥃', beer: '🍺', energy: '⚡',
+  rofimata: svg('<path d="M4 9h12v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8.5 2.5c-.5.8.5 1.2 0 2M12 2.5c-.5.8.5 1.2 0 2"/>'),
+  fresh: svg('<circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16M6.6 6.6l10.8 10.8M17.4 6.6 6.6 17.4"/>'),
+  juices: svg('<rect x="7" y="7" width="10" height="13" rx="2"/><path d="M7 10.5h10M13.5 7l1.2-3.5 2.3.7"/>'),
+  soft: svg('<path d="M7 8h10l-1.2 12H8.2L7 8z"/><path d="M12.4 8l1.8-5"/>'),
+  food: svg('<path d="M4 10a8 5.5 0 0 1 16 0z"/><path d="M4 13.5h16"/><path d="M5 17h14"/>'),
+  pizza: svg('<path d="M12 21 4.5 6a14 14 0 0 1 15 0L12 21z"/><circle cx="10.5" cy="9.5" r="1" fill="currentColor" stroke="none"/><circle cx="13.5" cy="12.5" r="1" fill="currentColor" stroke="none"/>'),
+  icecream: svg('<path d="M7.5 11a4.5 4.5 0 0 1 9 0"/><path d="M8 11h8l-4 10-4-10z"/>'),
+  wine: svg('<path d="M7 3h10l-.6 5a4.4 4.4 0 0 1-8.8 0L7 3z"/><path d="M12 12.5V19M8.5 21h7"/>'),
+  cocktails: svg('<path d="M4 4h16l-8 9-8-9z"/><path d="M12 13v6M8 21h8M14.5 4 17 1.5"/>'),
+  premium: svg('<path d="M5 5h14c0 3.6-3.1 6.5-7 6.5S5 8.6 5 5z"/><path d="M12 11.5V19M8.5 21h7M19 1.5v3M17.5 3h3"/>'),
+  spirits: svg('<path d="M6.5 4.5h11L16.4 20H7.6L6.5 4.5z"/><path d="M7.3 13h9.4"/>'),
+  beer: svg('<path d="M6 6.5h10v12a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6 18.5v-12z"/><path d="M16 10h1a2.5 2.5 0 0 1 0 5h-1M6 9.5h10"/>'),
+  energy: svg('<path d="M13 2 5 13.5h6L10.5 22 19 10h-6L13 2z"/>'),
+  fallback: svg('<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>'),
 };
 
 function el(tag, className, text) {
@@ -92,26 +107,31 @@ function renderHome(app) {
 
   const results = el('div', 'items');
   results.style.display = 'none';
-  const grid = el('div', 'grid');
+  const list = el('div', 'cat-list');
   for (const s of SECTIONS) {
-    const tile = el('a', 'tile');
-    tile.href = '#c/' + s.id;
-    tile.appendChild(el('div', 'tile-icon', ICONS[s.id] || '🍽️'));
+    const row = el('a', 'cat-row');
+    row.href = '#c/' + s.id;
+    const icon = el('span', 'cat-icon');
+    icon.innerHTML = ICONS[s.id] || ICONS.fallback;
+    row.appendChild(icon);
     const nameWrap = el('div');
-    nameWrap.appendChild(el('div', 'tile-name', s.nav));
-    nameWrap.appendChild(el('div', 'tile-sub', enTitle(s)));
-    tile.appendChild(nameWrap);
-    tile.appendChild(el('div', 'tile-count', countItems(s) + ' είδη'));
-    grid.appendChild(tile);
+    nameWrap.appendChild(el('div', 'cat-name', s.nav));
+    nameWrap.appendChild(el('div', 'cat-sub', enTitle(s)));
+    row.appendChild(nameWrap);
+    const meta = el('div', 'cat-meta');
+    meta.appendChild(el('span', 'cat-count', String(countItems(s))));
+    meta.appendChild(el('span', 'cat-chevron', '›'));
+    row.appendChild(meta);
+    list.appendChild(row);
   }
   shell.appendChild(results);
-  shell.appendChild(grid);
+  shell.appendChild(list);
 
   search.addEventListener('input', () => {
     renderSearchResults(results, search.value);
     const searching = search.value.trim().length >= 2;
     results.style.display = searching ? '' : 'none';
-    grid.style.display = searching ? 'none' : '';
+    list.style.display = searching ? 'none' : '';
   });
 
   renderLegalCard(shell);
