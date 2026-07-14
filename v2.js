@@ -138,12 +138,20 @@ function enTitle(section) {
 
 function itemCard(item) {
   const card = el('div', 'card');
-  const left = el('div');
-  left.appendChild(el('div', 'card-name', item.n));
-  if (item.d) left.appendChild(el('div', 'card-desc', item.d));
-  card.appendChild(left);
+  card.appendChild(el('div', 'card-name', item.n));
+  if (item.d) card.appendChild(el('div', 'card-desc', item.d));
   card.appendChild(el('div', 'card-price', item.p));
   return card;
+}
+
+function renderCover(app) {
+  const cover = el('div', 'cover');
+  cover.innerHTML = COVER;
+  const logoCard = el('div', 'logo-card');
+  logoCard.appendChild(el('div', 'logo-card-name', 'blue'));
+  logoCard.appendChild(el('div', 'logo-card-tag', 'the beach bar'));
+  cover.appendChild(logoCard);
+  app.appendChild(cover);
 }
 
 function renderLegalCard(parent) {
@@ -162,13 +170,7 @@ function renderLegalCard(parent) {
 }
 
 function renderHome(app) {
-  const cover = el('div', 'cover');
-  cover.innerHTML = COVER;
-  const logoCard = el('div', 'logo-card');
-  logoCard.appendChild(el('div', 'logo-card-name', 'blue'));
-  logoCard.appendChild(el('div', 'logo-card-tag', 'the beach bar'));
-  cover.appendChild(logoCard);
-  app.appendChild(cover);
+  renderCover(app);
 
   const shell = el('div', 'shell');
   shell.appendChild(el('div', 'min-note', MIN_NOTE));
@@ -193,28 +195,28 @@ function renderHome(app) {
 }
 
 function renderCategory(app, section) {
-  const appbar = el('div', 'appbar');
-  const row = el('div', 'appbar-row');
-  const back = el('a', 'back', '←');
-  back.href = '#';
-  back.setAttribute('aria-label', 'Πίσω / Back');
-  row.appendChild(back);
-  const titleWrap = el('div');
-  titleWrap.appendChild(el('div', 'appbar-title', section.t));
-  if (section.note) titleWrap.appendChild(el('div', 'appbar-note', section.note));
-  row.appendChild(titleWrap);
-  appbar.appendChild(row);
-
-  const chips = el('div', 'chips');
-  for (const s of SECTIONS) {
-    const chip = el('a', 'chip' + (s.id === section.id ? ' active' : ''), s.nav);
-    chip.href = '#c/' + s.id;
-    chips.appendChild(chip);
-  }
-  appbar.appendChild(chips);
-  app.appendChild(appbar);
+  renderCover(app);
 
   const shell = el('div', 'shell');
+
+  const back = el('a', 'back-pill');
+  back.href = '#';
+  back.setAttribute('aria-label', 'Πίσω / Back');
+  back.appendChild(el('span', 'back-pill-chevron', '‹'));
+  back.appendChild(el('span', null, 'Πίσω'));
+  shell.appendChild(back);
+
+  const head = el('div', 'cat-head');
+  const headBody = el('div', 'cat-head-body');
+  headBody.appendChild(el('div', 'cat-head-name', section.nav));
+  headBody.appendChild(el('div', 'cat-head-sub', enTitle(section)));
+  if (section.note) headBody.appendChild(el('div', 'cat-head-note', section.note));
+  head.appendChild(headBody);
+  const headArt = el('div', 'cat-head-art');
+  headArt.innerHTML = ART[section.id] || ART.fallback;
+  head.appendChild(headArt);
+  shell.appendChild(head);
+
   const items = el('div', 'items');
   for (const item of section.items) {
     if (item.h) items.appendChild(el('div', 'subheading', item.h));
@@ -233,8 +235,6 @@ function router() {
   if (section) renderCategory(app, section);
   else renderHome(app);
   window.scrollTo(0, 0);
-  const active = document.querySelector('.chips .chip.active');
-  if (active) active.scrollIntoView({ block: 'nearest', inline: 'center' });
 }
 
 window.addEventListener('hashchange', router);
