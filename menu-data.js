@@ -58,6 +58,12 @@ const SECTIONS = [
  {n:'Κρύα Σάντουιτς* / Cold Sandwich*', p:'4.00€'},
  {n:'Χοτ Ντογκ / Hot Dog', p:'4.00€'}
 ]},
+{id:'pizza', nav:'Πίτσα', t:'ΠΙΤΣΑ | PIZZA', items:[
+ {n:'Μαργαρίτα / Margherita', p:'9.00€', d:'Σάλτσα ντομάτας, μοτσαρέλα, ρίγανη / Tomato sauce, mozzarella, oregano'},
+ {n:'Πεπερόνι / Pepperoni', p:'10.00€', d:'Σάλτσα ντομάτας, μοτσαρέλα, πεπερόνι / Tomato sauce, mozzarella, pepperoni'},
+ {n:'Σπέσιαλ / Special', p:'11.00€', d:'Ζαμπόν, μπέικον, μανιτάρια, πιπεριές, μοτσαρέλα / Ham, bacon, mushrooms, peppers, mozzarella'},
+ {n:'Κοτόπουλο / Chicken', p:'11.00€', d:'Ψητό κοτόπουλο, πιπεριές, μοτσαρέλα, σως μπάρμπεκιου / Grilled chicken, peppers, mozzarella, BBQ sauce'}
+]},
 {id:'icecream', nav:'Παγωτά', t:'ΠΑΓΩΤΑ | ICE CREAM', items:[
  {n:'Γρανίτα / Granita', p:'5.00€'},
  {n:'Μιλκ Σέικ / Milkshake', p:'7.00€'},
