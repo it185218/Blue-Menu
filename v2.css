@@ -39,149 +39,120 @@ button {
   margin: 0 auto;
 }
 
-/* Home: hero */
+/* Home: cover with logo card (parco-style) */
 
-.hero {
-  background: linear-gradient(160deg, #1C2957 0%, #24356E 100%);
-  border-radius: 0 0 26px 26px;
-  text-align: center;
-  padding: 36px 20px 28px;
+.cover {
+  position: relative;
+  height: 216px;
+  overflow: hidden;
 }
 
-.hero-logo {
+.cover svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-card {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 22px 26px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.14);
+}
+
+.logo-card-name {
   font-family: 'Comfortaa', sans-serif;
-  font-weight: 300;
-  font-size: 54px;
+  font-weight: 400;
+  font-size: 36px;
   line-height: 0.9;
-  color: #FFFFFF;
+  color: var(--navy);
   letter-spacing: -0.02em;
 }
 
-.hero-tagline {
+.logo-card-tag {
   font-family: 'Comfortaa', sans-serif;
-  font-size: 12px;
+  font-size: 8.5px;
   color: var(--accent);
-  letter-spacing: 0.4em;
-  text-indent: 0.4em;
-  margin-top: 10px;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  margin-top: 8px;
 }
 
-.hero-badge {
-  display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 10.5px;
+.min-note {
+  padding: 14px 24px 0;
+  text-align: center;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  padding: 8px 14px;
-  border-radius: 999px;
-  margin-top: 20px;
-  line-height: 1.5;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
-/* Home: search */
+/* Home: big category cards (name left, illustration right) */
 
-.search-wrap {
-  padding: 16px 16px 0;
-}
-
-.search {
-  width: 100%;
-  box-sizing: border-box;
-  background: #FFFFFF;
-  border: 1px solid rgba(28, 41, 87, 0.12);
-  border-radius: 14px;
-  box-shadow: var(--card-shadow);
-  padding: 12px 16px;
-  font: inherit;
-  font-size: 14px;
-  color: var(--navy);
-  outline: none;
-}
-
-.search::placeholder {
-  color: rgba(28, 41, 87, 0.4);
-}
-
-.search:focus {
-  border-color: var(--accent);
-}
-
-/* Home: category list */
-
-.cat-list {
+.cat-cards {
   display: grid;
-  gap: 10px;
-  padding: 16px 16px 4px;
+  gap: 13px;
+  padding: 16px 14px 4px;
 }
 
-.cat-row {
+.cat-card {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: stretch;
+  justify-content: space-between;
   background: #FFFFFF;
-  border-radius: 16px;
-  padding: 11px 14px 11px 11px;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 104px;
   box-shadow: var(--card-shadow);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.cat-row:hover {
+.cat-card:hover {
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(16, 24, 40, 0.1), 0 1px 3px rgba(16, 24, 40, 0.08);
+  box-shadow: 0 3px 10px rgba(16, 24, 40, 0.12), 0 1px 3px rgba(16, 24, 40, 0.08);
 }
 
-.cat-icon {
-  flex-shrink: 0;
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
-  background: linear-gradient(150deg, #24356E 0%, #1C2957 100%);
-  color: #8FD9E6;
-  display: grid;
-  place-items: center;
+.cat-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px 14px 18px 22px;
+  min-width: 0;
 }
 
-.cat-name {
-  font-size: 14.5px;
+.cat-card-name {
+  font-size: 21px;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--navy);
 }
 
-.cat-sub {
-  font-size: 10px;
+.cat-card-sub {
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-top: 2px;
+  margin-top: 6px;
 }
 
-.cat-meta {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.cat-art {
+  flex-shrink: 0;
+  width: 35%;
+  max-width: 170px;
 }
 
-.cat-count {
-  min-width: 22px;
-  text-align: center;
-  font-size: 10.5px;
-  font-weight: 700;
-  color: var(--muted);
-  background: rgba(28, 41, 87, 0.06);
-  border-radius: 999px;
-  padding: 3px 7px;
-}
-
-.cat-chevron {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1;
-  color: rgba(28, 41, 87, 0.35);
-  transform: translateY(-1px);
+.cat-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* Category screen */
@@ -338,13 +309,6 @@ button {
   font-size: 11.5px;
   color: var(--muted);
   padding: 2px 4px;
-}
-
-.empty {
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-  padding: 26px 16px;
 }
 
 /* Legal / footer card */
