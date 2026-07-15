@@ -9,12 +9,12 @@ const SECTIONS = [
 {id:'rofimata', nav:'Ροφήματα', t:'ΡΟΦΗΜΑΤΑ | BEVERAGES', items:[
  {n:'Νες Καφέ / Nescafé', p:'5.00€', d:'Στιγμιαίος καφές, ζεστός, με ή χωρίς γάλα / Instant coffee, hot, with or without milk', img:'images/nescafe.webp'},
  {n:'Νες Καφέ Φραπέ / Nescafé Frappé', p:'5.00€', d:'Ο κλασικός ελληνικός κρύος χτυπητός καφές με πλούσιο αφρό / The classic Greek iced shaken coffee with rich foam', img:'images/frappe.webp'},
- {n:'Εσπρέσο / Espresso', p:'4.00€', d:'Εκλεκτό χαρμάνι σε μονή ή διπλή δόση / Fine espresso blend, single or double shot', img:'images/espresso.webp'},
  {n:'Φρέντο Εσπρέσο / Freddo Espresso', p:'5.00€', d:'Διπλός espresso χτυπημένος με πάγο / Double espresso shaken over ice', img:'images/freddo-espresso.webp'},
- {n:'Καπουτσίνο / Cappuccino', p:'5.00€', d:'Espresso με βελούδινο ζεστό αφρόγαλα / Espresso with velvety steamed milk foam', img:'images/cappuccino.webp'},
  {n:'Φρέντο Καπουτσίνο / Freddo Cappuccino', p:'5.50€', d:'Κρύος διπλός espresso με παγωμένο αφρόγαλα / Iced double espresso topped with chilled milk foam', img:'images/freddo-cappuccino.webp'},
- {n:'Σοκολάτα Ζεστή / Hot Chocolate', p:'5.50€', d:'Πλούσια ζεστή σοκολάτα / Rich hot chocolate', img:'images/chocolate-hot.webp'},
- {n:'Σοκολάτα Κρύα / Iced Chocolate', p:'5.50€', d:'Πλούσια παγωμένη σοκολάτα / Rich iced chocolate', img:'images/chocolate-cold.webp'}
+ {n:'Εσπρέσο / Espresso', p:'4.00€', d:'Εκλεκτό χαρμάνι σε μονή ή διπλή δόση / Fine espresso blend, single or double shot', img:'images/espresso.webp'},
+ {n:'Καπουτσίνο / Cappuccino', p:'5.00€', d:'Espresso με βελούδινο ζεστό αφρόγαλα / Espresso with velvety steamed milk foam', img:'images/cappuccino.webp'},
+ {n:'Σοκολάτα Κρύα / Iced Chocolate', p:'5.50€', d:'Πλούσια παγωμένη σοκολάτα / Rich iced chocolate', img:'images/chocolate-cold.webp'},
+ {n:'Σοκολάτα Ζεστή / Hot Chocolate', p:'5.50€', d:'Πλούσια ζεστή σοκολάτα / Rich hot chocolate', img:'images/chocolate-hot.webp'}
 ]},
 {id:'fresh', nav:'Φρέσκοι Χυμοί', t:'ΦΥΣΙΚΟΙ ΧΥΜΟΙ | FRESH JUICES', note:'Ποτήρι / Glass', items:[
  {n:'Πορτοκάλι / Orange', p:'6.00€', d:'Φρεσκοστυμμένα πορτοκάλια ημέρας / Freshly squeezed oranges of the day'},
@@ -38,8 +38,7 @@ const SECTIONS = [
  {n:'Ροζ Σόδα / Pink Soda', p:'5.00€', d:'Δροσιστική ροζ σόδα / Refreshing pink soda', img:'images/pink-soda.webp'},
  {n:'Κρύο Τσάι Λεμόνι / Ice Tea Lemon 330ml', p:'5.00€', d:'Παγωμένο τσάι λεμόνι / Lemon iced tea', img:'images/ice-tea-lemon.webp'},
  {n:'Κρύο Τσάι Ροδάκινο / Ice Tea Peach 500ml', p:'6.00€', d:'Παγωμένο τσάι ροδάκινο / Peach iced tea', img:'images/ice-tea-peach.webp'},
- {n:'Μεταλλικό Νερό / Mineral Water 0.5L', p:'1.00€', d:'Φυσικό μεταλλικό νερό / Natural mineral water', img:'images/water.webp'},
- {n:'Μεταλλικό Νερό / Mineral Water 1.5L', p:'2.00€', d:'Φυσικό μεταλλικό νερό / Natural mineral water', img:'images/water.webp'}
+ {n:'Μεταλλικό Νερό / Mineral Water 0.5L', p:'1.00€', d:'Φυσικό μεταλλικό νερό / Natural mineral water', img:'images/water.webp'}
 ]},
 {id:'food', nav:'Φαγητό', t:'FOOD & SNACKS', foot:'* Γκούντα, Ζαμπόν, Γαλοπούλα / Gouda, Ham, Turkey', items:[
  {n:'Ελληνική Σαλάτα / Greek Salad', p:'8.00€', d:'Μαρούλι, ντομάτα, αγγούρι, κάπαρη, πράσινη πιπεριά, κρεμμύδι, ελιές, φέτα, ρίγανη, ελαιόλαδο, ξύδι / Lettuce, tomato, cucumber, capers, green pepper, onion, olives, feta, oregano, olive oil, vinegar'},
