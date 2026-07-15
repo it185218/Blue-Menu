@@ -29,16 +29,17 @@ const SECTIONS = [
  {n:'Μόσιον / Motion', p:'5.00€', d:'Πολυβιταμινούχος χυμός φρούτων / Multivitamin fruit juice'},
  {n:'Βύσσινο / Sour Cherry 250ml', p:'4.00€', d:'Παραδοσιακή βυσσινάδα / Traditional sour cherry juice'}
 ]},
-{id:'soft', nav:'Αναψυκτικά', t:'ΑΝΑΨΥΚΤΙΚΑ | REFRESHMENTS', note:'Κουτί / Can 330ml', items:[
- {n:'Κόκα Κόλα / Coca-Cola', p:'5.00€', d:'Κλασική, light ή zero / Classic, light or zero', img:'images/coca-cola.webp'},
- {n:'Πορτοκαλάδα / Orangeade', p:'5.00€', d:'Πορτοκαλάδα με ανθρακικό ή χωρίς / Sparkling or still orangeade', img:'images/fanta-orange.webp'},
- {n:'Λεμονάδα / Lemonade', p:'5.00€', d:'Δροσιστική λεμονάδα / Refreshing lemonade', img:'images/fanta-lemon.webp'},
- {n:'Σπράιτ / Sprite', p:'5.00€', d:'Αναψυκτικό λεμόνι-λάιμ / Lemon-lime soda', img:'images/sprite.webp'},
- {n:'Σόδα / Soda', p:'5.00€', d:'Ανθρακούχο νερό / Sparkling soda water', img:'images/soda.webp'},
- {n:'Ροζ Σόδα / Pink Soda', p:'5.00€', d:'Δροσιστική ροζ σόδα / Refreshing pink soda', img:'images/pink-soda.webp'},
- {n:'Κρύο Τσάι Λεμόνι / Ice Tea Lemon 330ml', p:'5.00€', d:'Παγωμένο τσάι λεμόνι / Lemon iced tea', img:'images/ice-tea-lemon.webp'},
- {n:'Κρύο Τσάι Ροδάκινο / Ice Tea Peach 500ml', p:'6.00€', d:'Παγωμένο τσάι ροδάκινο / Peach iced tea', img:'images/ice-tea-peach.webp'},
- {n:'Μεταλλικό Νερό / Mineral Water 0.5L', p:'1.00€', d:'Φυσικό μεταλλικό νερό / Natural mineral water', img:'images/water.webp'}
+{id:'soft', nav:'Αναψυκτικά', t:'ΑΝΑΨΥΚΤΙΚΑ | REFRESHMENTS', items:[
+ {n:'Κόκα Κόλα / Coca-Cola', p:'5.00€', d:'Κλασική, light ή zero, 330ml / Classic, light or zero, 330ml', img:'images/coca-cola.webp'},
+ {n:'Πορτοκαλάδα / Orangeade', p:'5.00€', d:'Πορτοκαλάδα με ανθρακικό ή χωρίς, 330ml / Sparkling or still orangeade, 330ml', img:'images/fanta-orange.webp'},
+ {n:'Λεμονάδα / Lemonade', p:'5.00€', d:'Δροσιστική λεμονάδα, 330ml / Refreshing lemonade, 330ml', img:'images/fanta-lemon.webp'},
+ {n:'Σπράιτ / Sprite', p:'5.00€', d:'Αναψυκτικό λεμόνι-λάιμ, 330ml / Lemon-lime soda, 330ml', img:'images/sprite.webp'},
+ {n:'Σόδα / Soda', p:'5.00€', d:'Ανθρακούχο νερό, 330ml / Sparkling soda water, 330ml', img:'images/soda.webp'},
+ {n:'Ροζ Σόδα / Pink Soda', p:'5.00€', d:'Δροσιστική ροζ σόδα, 330ml / Refreshing pink soda, 330ml', img:'images/pink-soda.webp'},
+ {n:'Κρύο Τσάι Λεμόνι / Ice Tea Lemon', p:'5.00€', d:'Παγωμένο τσάι λεμόνι, 330ml / Lemon iced tea, 330ml', img:'images/ice-tea-lemon.webp'},
+ {n:'Κρύο Τσάι Ροδάκινο / Ice Tea Peach', p:'6.00€', d:'Παγωμένο τσάι ροδάκινο, 330ml / Peach iced tea, 330ml', img:'images/ice-tea-peach.webp'},
+ {n:'Κρύο Τσάι Green Passion Fruit / Ice Tea Green Passion Fruit', p:'6.00€', d:'Πράσινο παγωμένο τσάι με φρούτο του πάθους, χωρίς ζάχαρη, 500ml / Green iced tea with passion fruit, no sugar, 500ml', img:'images/ice-tea-green.webp'},
+ {n:'Μεταλλικό Νερό / Mineral Water', p:'1.00€', d:'Φυσικό μεταλλικό νερό, 500ml / Natural mineral water, 500ml', img:'images/water.webp'}
 ]},
 {id:'food', nav:'Φαγητό', t:'FOOD & SNACKS', foot:'* Γκούντα, Ζαμπόν, Γαλοπούλα / Gouda, Ham, Turkey', items:[
  {n:'Ελληνική Σαλάτα / Greek Salad', p:'8.00€', d:'Μαρούλι, ντομάτα, αγγούρι, κάπαρη, πράσινη πιπεριά, κρεμμύδι, ελιές, φέτα, ρίγανη, ελαιόλαδο, ξύδι / Lettuce, tomato, cucumber, capers, green pepper, onion, olives, feta, oregano, olive oil, vinegar'},
