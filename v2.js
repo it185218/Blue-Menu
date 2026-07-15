@@ -1,7 +1,9 @@
 // blue — the beach bar · Εκδοχή Β (app-style, Menurio/parco-like)
+// On first entry the visitor picks a language (gr/en/bg) on a branded gate;
+// the whole menu then renders in that language via v2-i18n.js.
 // Hash-routed screens over the shared menu-data.js:
 //   #        → home (cover with logo card, big category cards, legal card)
-//   #c/<id>  → one category's item list with back button and chips
+//   #c/<id>  → one category's item list with back button
 
 // Category art: refined monoline icon on a deep navy gradient panel —
 // brand-consistent and photography-free. Gradient ids are namespaced per
@@ -50,20 +52,56 @@ const COVER =
   '<path d="M0 190q100-26 200 0t200 0 200 0 200 0" fill="none" stroke="rgba(47,168,188,0.5)" stroke-width="2"/>' +
   '</svg>';
 
+// Language state — session-scoped so every fresh visit (QR scan) asks again.
+// Storage access can throw inside sandboxed frames; fall back to in-memory.
+const langStore = {
+  get() { try { return sessionStorage.getItem('blueLang') || ''; } catch (e) { return ''; } },
+  set(v) { try { sessionStorage.setItem('blueLang', v); } catch (e) { /* in-memory only */ } },
+  clear() { try { sessionStorage.removeItem('blueLang'); } catch (e) { /* in-memory only */ } },
+};
+let LANG = langStore.get();
+
+// Canonical strings are "GR / EN"; split once on the first ' / '.
+const grPart = (s) => { const i = s.indexOf(' / '); return (i === -1 ? s : s.slice(0, i)).trim(); };
+const enPart = (s) => { const i = s.indexOf(' / '); return (i === -1 ? s : s.slice(i + 3)).trim(); };
+
+const itemEntry = (section, item) => I18N.items[section.id + '|' + grPart(item.n)] || {};
+
+function itemName(section, item) {
+  const n = itemEntry(section, item).n || {};
+  if (LANG === 'gr') return n.gr || grPart(item.n);
+  if (LANG === 'bg') return n.bg || enPart(item.n);
+  return n.en || enPart(item.n);
+}
+
+function itemDesc(section, item) {
+  if (!item.d) return null;
+  const d = itemEntry(section, item).d || {};
+  if (LANG === 'gr') return d.gr || grPart(item.d);
+  if (LANG === 'bg') return d.bg || enPart(item.d);
+  return d.en || enPart(item.d);
+}
+
+function sectionField(section, field) {
+  const s = I18N.sections[section.id];
+  return (s && s[field] && s[field][LANG]) || null;
+}
+
+const sectionName = (section) => sectionField(section, 'name') || section.nav;
+
+function subheadText(h) {
+  const key = h.split('|')[0].trim();
+  const e = I18N.subheads[key];
+  return (e && e[LANG]) || key;
+}
+
+const ui = (key) => I18N.ui[key][LANG];
+
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
   if (text != null) node.textContent = text;
   return node;
-}
-
-function countItems(section) {
-  return section.items.filter((i) => i.n).length;
-}
-
-function enTitle(section) {
-  const parts = section.t.split('|');
-  return (parts[1] || parts[0]).trim();
 }
 
 // Flat placeholder for items without a photo yet: soft navy tile with the
@@ -78,15 +116,16 @@ const photoPlaceholder = (sectionId) =>
 function itemCard(item, section) {
   const card = el('div', 'card');
   const body = el('div', 'card-body');
-  body.appendChild(el('div', 'card-name', item.n));
-  if (item.d) body.appendChild(el('div', 'card-desc', item.d));
+  body.appendChild(el('div', 'card-name', itemName(section, item)));
+  const desc = itemDesc(section, item);
+  if (desc) body.appendChild(el('div', 'card-desc', desc));
   body.appendChild(el('div', 'card-price', item.p));
   card.appendChild(body);
   const photo = el('div', 'card-photo');
   if (item.img) {
     const img = document.createElement('img');
     img.src = item.img;
-    img.alt = item.n;
+    img.alt = itemName(section, item);
     img.loading = 'lazy';
     photo.appendChild(img);
   } else {
@@ -103,6 +142,19 @@ function renderCover(app) {
   logoCard.appendChild(el('div', 'logo-card-name', 'blue'));
   logoCard.appendChild(el('div', 'logo-card-tag', 'the beach bar'));
   cover.appendChild(logoCard);
+  const lang = I18N.langs.find((l) => l.code === LANG);
+  if (lang) {
+    const chip = el('button', 'lang-chip');
+    chip.type = 'button';
+    chip.setAttribute('aria-label', 'Γλώσσα / Language / Език');
+    chip.innerHTML = lang.flag;
+    chip.addEventListener('click', () => {
+      LANG = '';
+      langStore.clear();
+      router();
+    });
+    cover.appendChild(chip);
+  }
   app.appendChild(cover);
 }
 
@@ -111,29 +163,53 @@ function renderLegalCard(parent) {
   card.appendChild(el('div', 'legal-logo', 'blue'));
   card.appendChild(el('div', 'legal-tagline', 'the beach bar'));
   const inspector = el('div', 'legal-inspector');
-  const [role, name] = INSPECTOR.split(': ');
-  inspector.append(role, document.createElement('br'), name);
+  inspector.append(ui('inspectorRole'), document.createElement('br'), ui('inspectorName'));
   card.appendChild(inspector);
   card.appendChild(el('div', 'legal-divider'));
   const lines = el('div', 'legal-lines');
-  for (const line of LEGAL) lines.appendChild(el('div', 'legal-line', line));
+  for (const line of ui('legal')) lines.appendChild(el('div', 'legal-line', line));
   card.appendChild(lines);
   parent.appendChild(card);
+}
+
+function renderLangGate(app) {
+  const gate = el('div', 'gate');
+  const inner = el('div', 'gate-inner');
+  inner.appendChild(el('div', 'gate-logo', 'blue'));
+  inner.appendChild(el('div', 'gate-tag', 'the beach bar'));
+  inner.appendChild(el('div', 'gate-hint', I18N.ui.pick));
+  const list = el('div', 'gate-langs');
+  for (const l of I18N.langs) {
+    const btn = el('button', 'lang-btn');
+    btn.type = 'button';
+    const flagWrap = el('span', 'lang-btn-flag');
+    flagWrap.innerHTML = l.flag;
+    btn.appendChild(flagWrap);
+    btn.appendChild(el('span', 'lang-btn-label', l.label));
+    btn.addEventListener('click', () => {
+      LANG = l.code;
+      langStore.set(l.code);
+      navigate();
+    });
+    list.appendChild(btn);
+  }
+  inner.appendChild(list);
+  gate.appendChild(inner);
+  app.appendChild(gate);
 }
 
 function renderHome(app) {
   renderCover(app);
 
   const shell = el('div', 'shell');
-  shell.appendChild(el('div', 'min-note', MIN_NOTE));
+  shell.appendChild(el('div', 'min-note', ui('minNote')));
 
   const cards = el('div', 'cat-cards');
   for (const s of SECTIONS) {
     const card = el('a', 'cat-card');
     card.href = '#c/' + s.id;
     const body = el('div', 'cat-card-body');
-    body.appendChild(el('div', 'cat-card-name', s.nav));
-    body.appendChild(el('div', 'cat-card-sub', enTitle(s)));
+    body.appendChild(el('div', 'cat-card-name', sectionName(s)));
     card.appendChild(body);
     const artWrap = el('div', 'cat-art');
     artWrap.innerHTML = ART[s.id] || ART.fallback;
@@ -153,16 +229,15 @@ function renderCategory(app, section) {
 
   const back = el('a', 'back-pill');
   back.href = '#';
-  back.setAttribute('aria-label', 'Πίσω / Back');
   back.appendChild(el('span', 'back-pill-chevron', '‹'));
-  back.appendChild(el('span', null, 'Πίσω'));
+  back.appendChild(el('span', null, ui('back')));
   shell.appendChild(back);
 
   const head = el('div', 'cat-head');
   const headBody = el('div', 'cat-head-body');
-  headBody.appendChild(el('div', 'cat-head-name', section.nav));
-  headBody.appendChild(el('div', 'cat-head-sub', enTitle(section)));
-  if (section.note) headBody.appendChild(el('div', 'cat-head-note', section.note));
+  headBody.appendChild(el('div', 'cat-head-name', sectionName(section)));
+  const note = sectionField(section, 'note');
+  if (note) headBody.appendChild(el('div', 'cat-head-note', note));
   head.appendChild(headBody);
   const headArt = el('div', 'cat-head-art');
   headArt.innerHTML = ART[section.id] || ART.fallback;
@@ -171,10 +246,11 @@ function renderCategory(app, section) {
 
   const items = el('div', 'items');
   for (const item of section.items) {
-    if (item.h) items.appendChild(el('div', 'subheading', item.h));
+    if (item.h) items.appendChild(el('div', 'subheading', subheadText(item.h)));
     else items.appendChild(itemCard(item, section));
   }
-  if (section.foot) items.appendChild(el('div', 'section-foot', section.foot));
+  const foot = sectionField(section, 'foot');
+  if (foot) items.appendChild(el('div', 'section-foot', foot));
   shell.appendChild(items);
   app.appendChild(shell);
 }
@@ -182,6 +258,11 @@ function renderCategory(app, section) {
 function router() {
   const app = document.getElementById('app');
   app.textContent = '';
+  if (!LANG) {
+    renderLangGate(app);
+    window.scrollTo(0, 0);
+    return;
+  }
   const match = location.hash.match(/^#c\/(.+)$/);
   const section = match && SECTIONS.find((s) => s.id === match[1]);
   if (section) renderCategory(app, section);

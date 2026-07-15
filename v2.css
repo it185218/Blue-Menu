@@ -83,6 +83,120 @@ button {
   margin-top: 8px;
 }
 
+.lang-chip {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: #FFFFFF;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
+}
+
+.lang-chip .flag {
+  width: 22px;
+  height: 15px;
+}
+
+/* Language gate (first screen after scanning) */
+
+.gate {
+  min-height: calc(100vh - 42px);
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  padding: 40px 24px;
+  background: linear-gradient(160deg, #22315F 0%, #151D3E 100%);
+}
+
+.gate-inner {
+  text-align: center;
+}
+
+.gate-logo {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 300;
+  font-size: 58px;
+  line-height: 0.9;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  animation: loader-logo-in 0.4s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.gate-tag {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  margin-top: 12px;
+  animation: loader-tag-in 0.4s ease 0.08s both;
+}
+
+.gate-hint {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 38px;
+  animation: gate-item-in 0.35s ease 0.15s both;
+}
+
+.gate-langs {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+  min-width: 250px;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: transform 0.12s ease;
+  animation: gate-item-in 0.35s ease both;
+}
+
+.gate-langs .lang-btn:nth-child(1) { animation-delay: 0.2s; }
+.gate-langs .lang-btn:nth-child(2) { animation-delay: 0.28s; }
+.gate-langs .lang-btn:nth-child(3) { animation-delay: 0.36s; }
+
+.lang-btn:hover {
+  transform: translateY(-1px);
+}
+
+.lang-btn-flag {
+  display: grid;
+  place-items: center;
+}
+
+.flag {
+  display: block;
+  border-radius: 3px;
+}
+
+@keyframes gate-item-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
 .min-note {
   padding: 14px 24px 0;
   text-align: center;
@@ -411,6 +525,10 @@ button {
   .loader-logo,
   .loader-tag,
   .loader-dot,
+  .gate-logo,
+  .gate-tag,
+  .gate-hint,
+  .lang-btn,
   #app.screen-in {
     animation: none;
   }
