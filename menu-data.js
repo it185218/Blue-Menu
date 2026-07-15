@@ -37,7 +37,7 @@ const SECTIONS = [
  {n:'Σόδα / Soda', p:'5.00€', d:'Ανθρακούχο νερό, 330ml / Sparkling soda water, 330ml', img:'images/soda.webp'},
  {n:'Ροζ Σόδα / Pink Soda', p:'5.00€', d:'Δροσιστική ροζ σόδα, 330ml / Refreshing pink soda, 330ml', img:'images/pink-soda.webp'},
  {n:'Κρύο Τσάι Λεμόνι / Ice Tea Lemon', p:'5.00€', d:'Παγωμένο τσάι λεμόνι, 330ml / Lemon iced tea, 330ml', img:'images/ice-tea-lemon.webp'},
- {n:'Κρύο Τσάι Ροδάκινο / Ice Tea Peach', p:'6.00€', d:'Παγωμένο τσάι ροδάκινο, 330ml / Peach iced tea, 330ml', img:'images/ice-tea-peach.webp'},
+ {n:'Κρύο Τσάι Ροδάκινο / Ice Tea Peach', p:'5.00€', d:'Παγωμένο τσάι ροδάκινο, 330ml / Peach iced tea, 330ml', img:'images/ice-tea-peach.webp'},
  {n:'Κρύο Τσάι Green Passion Fruit / Ice Tea Green Passion Fruit', p:'6.00€', d:'Πράσινο παγωμένο τσάι με φρούτο του πάθους, χωρίς ζάχαρη, 500ml / Green iced tea with passion fruit, no sugar, 500ml', img:'images/ice-tea-green.webp'},
  {n:'Μεταλλικό Νερό / Mineral Water', p:'1.00€', d:'Φυσικό μεταλλικό νερό, 500ml / Natural mineral water, 500ml', img:'images/water.webp'}
 ]},
