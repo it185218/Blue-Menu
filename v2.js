@@ -164,6 +164,9 @@ function router() {
   const section = match && SECTIONS.find((s) => s.id === match[1]);
   if (section) renderCategory(app, section);
   else renderHome(app);
+  app.classList.remove('screen-in');
+  void app.offsetWidth; /* restart the enter animation */
+  app.classList.add('screen-in');
   window.scrollTo(0, 0);
 }
 
@@ -188,7 +191,7 @@ function navigate() {
   clearTimeout(loadTimer);
   showLoader(document.getElementById('app'));
   window.scrollTo(0, 0);
-  loadTimer = setTimeout(router, 1000);
+  loadTimer = setTimeout(router, 500);
 }
 
 window.addEventListener('hashchange', navigate);
