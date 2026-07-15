@@ -167,5 +167,29 @@ function router() {
   window.scrollTo(0, 0);
 }
 
-window.addEventListener('hashchange', router);
+// Every in-app navigation (into a category, back home) shows a short
+// branded splash — the blue logo on navy — before the screen appears.
+let loadTimer = null;
+
+function showLoader(app) {
+  app.textContent = '';
+  const loader = el('div', 'loader');
+  const inner = el('div', 'loader-inner');
+  inner.appendChild(el('div', 'loader-logo', 'blue'));
+  inner.appendChild(el('div', 'loader-tag', 'the beach bar'));
+  const dots = el('div', 'loader-dots');
+  for (let i = 0; i < 3; i++) dots.appendChild(el('span', 'loader-dot'));
+  inner.appendChild(dots);
+  loader.appendChild(inner);
+  app.appendChild(loader);
+}
+
+function navigate() {
+  clearTimeout(loadTimer);
+  showLoader(document.getElementById('app'));
+  window.scrollTo(0, 0);
+  loadTimer = setTimeout(router, 1000);
+}
+
+window.addEventListener('hashchange', navigate);
 router();
