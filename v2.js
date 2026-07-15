@@ -66,11 +66,33 @@ function enTitle(section) {
   return (parts[1] || parts[0]).trim();
 }
 
-function itemCard(item) {
+// Flat placeholder for items without a photo yet: soft navy tile with the
+// category's line icon. Swapped for a real <img> as soon as item.img is set.
+const photoPlaceholder = (sectionId) =>
+  '<svg viewBox="0 0 120 120" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+  '<rect width="120" height="120" fill="#22315F"/>' +
+  '<circle cx="98" cy="104" r="52" fill="rgba(255,255,255,0.04)"/>' +
+  '<g color="#6E87C9" fill="none" stroke="#6E87C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(38,38) scale(1.85)">' +
+  (MONO[sectionId] || MONO.fallback) + '</g></svg>';
+
+function itemCard(item, section) {
   const card = el('div', 'card');
-  card.appendChild(el('div', 'card-name', item.n));
-  if (item.d) card.appendChild(el('div', 'card-desc', item.d));
-  card.appendChild(el('div', 'card-price', item.p));
+  const body = el('div', 'card-body');
+  body.appendChild(el('div', 'card-name', item.n));
+  if (item.d) body.appendChild(el('div', 'card-desc', item.d));
+  body.appendChild(el('div', 'card-price', item.p));
+  card.appendChild(body);
+  const photo = el('div', 'card-photo');
+  if (item.img) {
+    const img = document.createElement('img');
+    img.src = item.img;
+    img.alt = item.n;
+    img.loading = 'lazy';
+    photo.appendChild(img);
+  } else {
+    photo.innerHTML = photoPlaceholder(section && section.id);
+  }
+  card.appendChild(photo);
   return card;
 }
 
@@ -150,7 +172,7 @@ function renderCategory(app, section) {
   const items = el('div', 'items');
   for (const item of section.items) {
     if (item.h) items.appendChild(el('div', 'subheading', item.h));
-    else items.appendChild(itemCard(item));
+    else items.appendChild(itemCard(item, section));
   }
   if (section.foot) items.appendChild(el('div', 'section-foot', section.foot));
   shell.appendChild(items);
