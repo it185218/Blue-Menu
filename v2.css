@@ -175,8 +175,11 @@ button {
 }
 
 .gate-langs .lang-btn:nth-child(1) { animation-delay: 0.2s; }
-.gate-langs .lang-btn:nth-child(2) { animation-delay: 0.28s; }
-.gate-langs .lang-btn:nth-child(3) { animation-delay: 0.36s; }
+.gate-langs .lang-btn:nth-child(2) { animation-delay: 0.26s; }
+.gate-langs .lang-btn:nth-child(3) { animation-delay: 0.32s; }
+.gate-langs .lang-btn:nth-child(4) { animation-delay: 0.38s; }
+.gate-langs .lang-btn:nth-child(5) { animation-delay: 0.44s; }
+.gate-langs .lang-btn:nth-child(6) { animation-delay: 0.5s; }
 
 .lang-btn:hover {
   transform: translateY(-1px);

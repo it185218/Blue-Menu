@@ -70,16 +70,14 @@ const itemEntry = (section, item) => I18N.items[section.id + '|' + grPart(item.n
 function itemName(section, item) {
   const n = itemEntry(section, item).n || {};
   if (LANG === 'gr') return n.gr || grPart(item.n);
-  if (LANG === 'bg') return n.bg || enPart(item.n);
-  return n.en || enPart(item.n);
+  return n[LANG] || enPart(item.n);
 }
 
 function itemDesc(section, item) {
   if (!item.d) return null;
   const d = itemEntry(section, item).d || {};
   if (LANG === 'gr') return d.gr || grPart(item.d);
-  if (LANG === 'bg') return d.bg || enPart(item.d);
-  return d.en || enPart(item.d);
+  return d[LANG] || enPart(item.d);
 }
 
 function sectionField(section, field) {
